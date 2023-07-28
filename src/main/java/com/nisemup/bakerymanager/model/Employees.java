@@ -1,6 +1,7 @@
 package com.nisemup.bakerymanager.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -29,6 +30,7 @@ public class Employees {
     private LocalDate birthday;
 
     @Column(name = "email", nullable = false, unique = true)
+    @Email
     private String email;
 
     @Column(name = "password", nullable = false)

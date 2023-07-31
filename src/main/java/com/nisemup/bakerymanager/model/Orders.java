@@ -20,8 +20,8 @@ public class Orders {
     private Long orderId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id", nullable = false)
-    private Employees employeeId;
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users userId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", nullable = false)

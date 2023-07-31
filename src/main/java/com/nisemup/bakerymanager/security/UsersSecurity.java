@@ -1,6 +1,6 @@
 package com.nisemup.bakerymanager.security;
 
-import com.nisemup.bakerymanager.model.Employees;
+import com.nisemup.bakerymanager.model.Users;
 import com.nisemup.bakerymanager.model.Status;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @Data
 
-public class SecurityEmployees implements UserDetails {
+public class UsersSecurity implements UserDetails {
 
     private final String username;
     private final String password;
@@ -37,32 +37,32 @@ public class SecurityEmployees implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return isActive;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isActive;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return isActive;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActive;
     }
 
-    public static UserDetails fromEmployee(Employees employee) {
+    public static UserDetails fromEmployee(Users users) {
         return new User(
-                employee.getEmail(), employee.getPassword(),
-                employee.getStatus().equals(Status.ACTIVE),
-                employee.getStatus().equals(Status.ACTIVE),
-                employee.getStatus().equals(Status.ACTIVE),
-                employee.getStatus().equals(Status.ACTIVE),
-                employee.getRole().getAuthorities()
+                users.getEmail(), users.getPassword(),
+                users.getStatus().equals(Status.ACTIVE),
+                users.getStatus().equals(Status.ACTIVE),
+                users.getStatus().equals(Status.ACTIVE),
+                users.getStatus().equals(Status.ACTIVE),
+                users.getRole().getAuthorities()
         );
     }
 }

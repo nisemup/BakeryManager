@@ -41,14 +41,14 @@ public class Users {
 
     @Column(name = "role", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private Role role = Role.USER;
 
     @Column(name = "status", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private Status status;
+    private Status status = Status.ACTIVE;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
 }

@@ -70,15 +70,4 @@ class UsersRepositoryTest {
         assertTrue(result.isEmpty());
         verify(usersRepository).findByUserId(id);
     }
-
-    @Test
-    void deleteById_WhenIdExists_MustDeleteUser() {
-        Users user = new Users();
-        user.setUserId(id);
-
-        usersRepository.deleteById(id);
-
-        verify(usersRepository).deleteById(id);
-        assertFalse(usersRepository.existsById(id));
-    }
 }

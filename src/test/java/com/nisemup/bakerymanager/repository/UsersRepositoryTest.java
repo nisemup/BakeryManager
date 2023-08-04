@@ -3,9 +3,8 @@ package com.nisemup.bakerymanager.repository;
 import com.nisemup.bakerymanager.model.Users;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Optional;
 
@@ -13,10 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest
 class UsersRepositoryTest {
 
-    @MockBean
+    @Mock
     private UsersRepository usersRepository;
 
     static final Long id = 1L;
@@ -77,11 +75,10 @@ class UsersRepositoryTest {
     void deleteById_WhenIdExists_MustDeleteUser() {
         Users user = new Users();
         user.setUserId(id);
-        when(usersRepository.findByUserId(id))
-                .thenReturn(Optional.of(user));
 
         usersRepository.deleteById(id);
 
         verify(usersRepository).deleteById(id);
+        assertFalse(usersRepository.existsById(id));
     }
 }

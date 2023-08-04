@@ -45,7 +45,7 @@ public class UsersService {
         return true;
     }
 
-    public boolean update(Long id, Users user) {
+    public void update(Long id, Users user) {
         if (usersRepository.findByUserId(id).isPresent()) {
             // TODO: Make exception
             Users updatableUser = usersRepository.findByUserId(id).get();
@@ -60,7 +60,5 @@ public class UsersService {
 
             usersRepository.save(updatableUser);
         }
-
-        return false;
     }
 }

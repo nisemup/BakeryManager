@@ -35,7 +35,7 @@ public class UsersController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("users") Users users,
+    public String createUser(@ModelAttribute("users") Users users,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "panel/users/new";

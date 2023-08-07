@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+</head>
+<body>
+
+<p th:text="${products.getProductName()}"/>
+<p th:text="${products.getProductDescription()}"/>
+<p th:text="${products.getCategoryId().getCategoryName()}"/>
+<p th:text="${products.getPrice()}"/>
+<p th:text="${products.getDiscount()}"/>
+<p th:text="${products.getDiscountAvailable()}"/>
+
+<!-- Visible for manager only -->
+<form th:method="DELETE" th:action="@{/panel/products/{id} (id=${products.getProductId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<br/>
+<hr/>
+
+<a th:href="@{/panel/products/{id}/edit (id=${products.getProductId()})}">Edit</a>
+
+</body>
+</html>

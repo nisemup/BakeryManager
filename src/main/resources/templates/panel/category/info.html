@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Category</title>
+</head>
+<body>
+
+<p th:text="${category.getCategoryName()}"/>
+<p th:text="${category.getCategoryDescription()}"/>
+
+<!-- Visible for manager only -->
+<form th:method="DELETE" th:action="@{/panel/category/{id} (id=${category.getCategoryId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<br/>
+<hr/>
+
+<a th:href="@{/panel/category/{id}/edit (id=${category.getCategoryId()})}">Edit</a>
+
+</body>
+</html>

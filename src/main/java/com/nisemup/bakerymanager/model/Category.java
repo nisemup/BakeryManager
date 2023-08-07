@@ -25,5 +25,5 @@ public class Category {
     private String picture;
 
     @Column(name = "active", nullable = false, columnDefinition = "boolean default true")
-    private Boolean active;
+    private Boolean active = true;
 }

@@ -41,15 +41,15 @@ public class UsersController {
             return "panel/users/new";
 
         usersService.create(users);
+
         return "redirect:/panel/users";
     }
 
     @GetMapping("/{id}/edit")
     public String editUserProfile(Model model, @PathVariable("id") Long id) {
-        if (usersService.findById(id).isPresent()) {
+        if (usersService.findById(id).isPresent())
             // TODO: Make exception
             model.addAttribute("users", usersService.findById(id).get());
-        }
 
         return "panel/users/edit";
     }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New product</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/panel/products}" th:object="${products}">
+    <label for="category_id">Enter category: </label>
+    <select th:field="*{categoryId}" class="form-control" id="category_id">
+        <option th:each="category: ${category}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+    </select>
+    <div style="color:red" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Category Error</div>
+    <br/>
+    <label for="product_name">Enter product name: </label>
+    <input type="text" th:field="*{productName}" id="product_name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">Name Error</div>
+    <br/>
+    <label for="product_description">Enter description: </label>
+    <input type="text" th:field="*{productDescription}" id="product_description"/>
+    <div style="color:red" th:if="${#fields.hasErrors('productDescription')}" th:errors="*{productDescription}">Description error</div>
+    <br/>
+    <label for="price">Enter price: </label>
+    <input type="text" th:field="*{price}" id="price"/>
+    <div style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price error</div>
+    <br/>
+    <label for="discount">Enter discount: </label>
+    <input type="text" th:field="*{discount}" id="discount"/>
+    <div style="color:red" th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}">Discount error</div>
+    <br/>
+    <label for="discount_available">Enter discount available: </label>
+    <input type="checkbox" th:field="*{discountAvailable}" id="discount_available"/>
+    <div style="color:red" th:if="${#fields.hasErrors('discountAvailable')}" th:errors="*{discountAvailable}">discount available error</div>
+    <br/>
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>

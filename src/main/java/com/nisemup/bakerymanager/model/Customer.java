@@ -11,21 +11,21 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "customers")
-public class Customers {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
-    private Long customerId;
+    private Long id;
 
     @Column(name = "company_name", nullable = false, length = 30)
     private String companyName;
 
-    @Column(name = "address", nullable = false, length = 100)
+    @Column(name = "address", nullable = false, length = 100, unique = true)
     private String address;
 
     @Column(name = "contact_name", nullable = false, length = 25)
-    private String contactName;
+    private String name;
 
     @Column(name = "phone_number", nullable = false, length = 10)
     private String phoneNumber;

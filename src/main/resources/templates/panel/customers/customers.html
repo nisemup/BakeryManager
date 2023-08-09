@@ -7,7 +7,7 @@
 <body>
 
 <div th:each="customer : ${customers}">
-    <a th:href="@{/panel/customers/{id}(id=${customer.getCustomerId()})}"
+    <a th:href="@{/panel/customers/{id}(id=${customer.getId()})}"
        th:text="${customer.getCompanyName() + ' (' + customer.getAddress() + ')'}"></a>
 </div>
 

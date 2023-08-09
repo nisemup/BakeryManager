@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/panel/users}" th:object="${users}">
+<form th:method="POST" th:action="@{/panel/users}" th:object="${user}">
     <label for="first_name">Enter first name: </label>
     <input type="text" th:field="*{firstName}" id="first_name"/>
     <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</div>

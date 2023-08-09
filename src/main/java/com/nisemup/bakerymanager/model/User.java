@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "first_name", nullable = false, length = 25)
     private String firstName;

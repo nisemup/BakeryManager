@@ -12,20 +12,20 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Table(name = "orders")
-public class Orders {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private Long orderId;
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
-    private Users userId;
+    private User userId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", nullable = false)
-    private Customers customerId;
+    private Customer customerId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id", nullable = false)

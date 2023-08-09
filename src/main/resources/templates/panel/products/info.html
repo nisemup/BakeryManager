@@ -6,22 +6,22 @@
 </head>
 <body>
 
-<p th:text="${products.getProductName()}"/>
-<p th:text="${products.getProductDescription()}"/>
-<p th:text="${products.getCategoryId().getCategoryName()}"/>
-<p th:text="${products.getPrice()}"/>
-<p th:text="${products.getDiscount()}"/>
-<p th:text="${products.getDiscountAvailable()}"/>
+<p th:text="${product.getName()}"/>
+<p th:text="${product.getDescription()}"/>
+<p th:text="${product.getCategoryId().getName()}"/>
+<p th:text="${product.getPrice()}"/>
+<p th:text="${product.getDiscount()}"/>
+<p th:text="${product.getDiscountAvailable()}"/>
 
 <!-- Visible for manager only -->
-<form th:method="DELETE" th:action="@{/panel/products/{id} (id=${products.getProductId()})}">
+<form th:method="DELETE" th:action="@{/panel/products/{id} (id=${product.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
 
 <br/>
 <hr/>
 
-<a th:href="@{/panel/products/{id}/edit (id=${products.getProductId()})}">Edit</a>
+<a th:href="@{/panel/products/{id}/edit (id=${product.getId()})}">Edit</a>
 
 </body>
 </html>

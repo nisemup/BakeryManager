@@ -3,5 +3,5 @@ package com.nisemup.bakerymanager.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderDetailsService {
+public class OrderService {
 }

@@ -1,9 +1,8 @@
 package com.nisemup.bakerymanager.controller;
 
-import com.nisemup.bakerymanager.model.Category;
-import com.nisemup.bakerymanager.model.Products;
+import com.nisemup.bakerymanager.model.Product;
 import com.nisemup.bakerymanager.service.CategoryService;
-import com.nisemup.bakerymanager.service.ProductsService;
+import com.nisemup.bakerymanager.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,50 +11,50 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/panel/products")
-public class ProductsController {
+public class ProductController {
 
     @Autowired
-    private ProductsService productsService;
+    private ProductService productService;
 
     @Autowired
     private CategoryService categoryService;
 
     @GetMapping()
     private String getProducts(Model model) {
-        model.addAttribute("products", productsService.findAll());
+        model.addAttribute("products", productService.findAll());
 
         return "panel/products/products";
     }
 
-    @GetMapping("/{products}")
-    public String getProductsInfo(Model model, @PathVariable Products products) {
-        model.addAttribute("products", products);
+    @GetMapping("/{product}")
+    public String getProductDetails(Model model, @PathVariable Product product) {
+        model.addAttribute("product", product);
 
         return "panel/products/info";
     }
 
     @GetMapping("/new")
-    public String newProduct(Model model, @ModelAttribute("products") Products products) {
+    public String newProduct(Model model, @ModelAttribute("product") Product product) {
         model.addAttribute("category", categoryService.findAll());
 
         return "panel/products/new";
     }
 
     @PostMapping()
-    public String createProduct(@ModelAttribute("products") Products products,
+    public String createProduct(@ModelAttribute("product") Product product,
                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "panel/products/new";
 
-        productsService.create(products);
+        productService.create(product);
 
         return "redirect:/panel/products";
     }
 
     @GetMapping("/{id}/edit")
-    public String editProductInfo(Model model, @PathVariable("id") Long id) {
-        if (productsService.findById(id).isPresent())
-            model.addAttribute("products", productsService.findById(id).get());
+    public String editProductDetails(Model model, @PathVariable("id") Long id) {
+        if (productService.findById(id).isPresent())
+            model.addAttribute("product", productService.findById(id).get());
 
         model.addAttribute("category", categoryService.findAll());
 
@@ -63,19 +62,19 @@ public class ProductsController {
     }
 
     @PatchMapping("/{id}")
-    public String updateProduct(@ModelAttribute("products") Products products, BindingResult bindingResult,
+    public String updateProduct(@ModelAttribute("product") Product product, BindingResult bindingResult,
                                 @PathVariable("id") Long id) {
         if (bindingResult.hasErrors())
             return "panel/products/edit";
 
-        productsService.update(id, products);
+        productService.update(id, product);
 
         return "redirect:/panel/products";
     }
 
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
-        productsService.deleteById(id);
+        productService.deleteById(id);
 
         return"redirect:/panel/products";
     }

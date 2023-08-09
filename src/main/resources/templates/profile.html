@@ -7,14 +7,14 @@
 <body>
 
 <!-- Visible for manager only -->
-<form th:method="DELETE" th:action="@{/panel/users/{id}(id=${users.getUserId()})}">
+<form th:method="DELETE" th:action="@{/panel/users/{id}(id=${user.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
 
 <br/>
 <hr/>
 
-<a th:href="@{/panel/users/{id}/edit (id=${users.getUserId()})}">Edit</a>
+<a th:href="@{/panel/users/{id}/edit (id=${user.getId()})}">Edit</a>
 
 </body>
 </html>

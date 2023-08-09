@@ -18,35 +18,30 @@ public class CategoryService {
     }
 
     public Optional<Category> findById(Long id) {
-        return categoryRepository.findByCategoryId(id);
+        return categoryRepository.findById(id);
     }
 
     public void deleteById(Long id) {
         categoryRepository.deleteById(id);
     }
 
-    public boolean create(Category category) {
-        Optional<Category> categoryAdd = categoryRepository.findByCategoryId(category.getCategoryId());
-
-        if (categoryAdd.isPresent())
-            return false;
+    public void create(Category category) {
+        // TODO: Make exception
+        if (categoryRepository.findByName(category.getName()).isPresent())
+            return;
 
         categoryRepository.save(category);
-
-        return true;
     }
 
     public void update(Long id, Category category) {
-        if (categoryRepository.findByCategoryId(id).isPresent()) {
-            // TODO: Make exception
-            Category updatableCategory = categoryRepository.findByCategoryId(id).get();
+        // TODO: Make exception
+        Category updatableCategory = categoryRepository.findById(id).orElseThrow();
 
-            updatableCategory.setCategoryName(category.getCategoryName());
-            updatableCategory.setCategoryDescription(category.getCategoryDescription());
-            updatableCategory.setPicture(category.getPicture());
-            updatableCategory.setActive(category.getActive());
+        updatableCategory.setName(category.getName());
+        updatableCategory.setDescription(category.getDescription());
+        updatableCategory.setPicture(category.getPicture());
+        updatableCategory.setActive(category.getActive());
 
-            categoryRepository.save(updatableCategory);
-        }
+        categoryRepository.save(updatableCategory);
     }
 }

@@ -2,8 +2,8 @@ package com.nisemup.bakerymanager.service;
 
 import com.nisemup.bakerymanager.model.Role;
 import com.nisemup.bakerymanager.model.Status;
-import com.nisemup.bakerymanager.model.Users;
-import com.nisemup.bakerymanager.repository.UsersRepository;
+import com.nisemup.bakerymanager.model.User;
+import com.nisemup.bakerymanager.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,78 +20,76 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class UsersServiceTest {
+class UserServiceTest {
 
     @Mock
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
 
     @Mock
     private PasswordEncoder passwordEncoder;
 
     @InjectMocks
-    private UsersService usersService;
+    private UserService userService;
 
     private static final Long id = 1L;
 
     @Test
     void findAll_WhenUsersExists_ReturnListOptionalWithUsers() {
-        List<Users> usersList = Arrays.asList(new Users(), new Users());
-        when(usersRepository.findAll())
-                .thenReturn(usersList);
+        List<User> userList = Arrays.asList(new User(), new User());
+        when(userRepository.findAll())
+                .thenReturn(userList);
 
-        List<Users> result = usersService.findAll();
+        List<User> result = userService.findAll();
 
-        assertEquals(usersList, result);
+        assertEquals(userList, result);
     }
 
     @Test
     void findById_WhenIdExist_ReturnOptionalWithUser() {
-        Optional<Users> userOptional = Optional.of(new Users());
-        when(usersRepository.findByUserId(id))
+        Optional<User> userOptional = Optional.of(new User());
+        when(userRepository.findById(id))
                 .thenReturn(userOptional);
 
-        Optional<Users> result = usersService.findById(id);
+        Optional<User> result = userService.findById(id);
 
         assertEquals(userOptional, result);
     }
 
     @Test
     void deleteById_WhenIdExist_MustDeleteUser() {
-        usersService.deleteById(id);
+        userService.deleteById(id);
 
-        verify(usersRepository).deleteById(id);
+        verify(userRepository).deleteById(id);
     }
 
     @Test
     void create_WithNewUser_MustCreateUser() {
-        Users user = new Users();
-        when(usersRepository.findByEmail(user.getEmail()))
+        User user = new User();
+        when(userRepository.findByEmail(user.getEmail()))
                 .thenReturn(Optional.empty());
 
-        boolean result = usersService.create(user);
+        userService.create(user);
 
         verify(passwordEncoder).encode(user.getPassword());
-        verify(usersRepository).save(user);
-        assertTrue(result);
+        verify(userRepository).save(user);
     }
 
     @Test
     void create_WithExistingUser_MustNotCreateUser() {
-        Users existingUser = new Users();
-        when(usersRepository.findByEmail(existingUser.getEmail()))
+        User existingUser = new User();
+        when(userRepository.findByEmail(existingUser.getEmail()))
                 .thenReturn(Optional.of(existingUser));
 
-        boolean result = usersService.create(existingUser);
+        userService.create(existingUser);
 
         verify(passwordEncoder, never()).encode(existingUser.getPassword());
-        verify(usersRepository, never()).save(existingUser);
-        assertFalse(result);
+        verify(userRepository, never()).save(existingUser);
     }
 
     @Test
     void update_WhenUserExist_MustUpdateUser() {
-        Users existingUser = new Users();
-        Users newUser = new Users();
+        User existingUser = new User();
+        User newUser = new User();
         newUser.setAvatar("avatar.png");
         newUser.setEmail("email@example.com");
         newUser.setBirthday(LocalDate.now());
@@ -101,12 +99,12 @@ class UsersServiceTest {
         newUser.setStatus(Status.ACTIVE);
 
 
-        when(usersRepository.findByUserId(id))
+        when(userRepository.findById(id))
                 .thenReturn(Optional.of(existingUser));
 
-        usersService.update(id, newUser);
+        userService.update(id, newUser);
 
-        verify(usersRepository).save(existingUser);
+        verify(userRepository).save(existingUser);
         assertEquals(newUser.getAvatar(), existingUser.getAvatar());
         assertEquals(newUser.getEmail(), existingUser.getEmail());
         assertEquals(newUser.getBirthday(), existingUser.getBirthday());
@@ -118,13 +116,13 @@ class UsersServiceTest {
 
     @Test
     void update_WhenUserDoesNotExist_MustNotUpdateUser() {
-        Users newUser = new Users();
+        User newUser = new User();
 
-        when(usersRepository.findByUserId(id))
+        when(userRepository.findById(id))
                 .thenReturn(Optional.empty());
 
-        usersService.update(id, newUser);
+        userService.update(id, newUser);
 
-        verify(usersRepository, never()).save(any(Users.class));
+        verify(userRepository, never()).save(any(User.class));
     }
 }

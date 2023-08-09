@@ -10,20 +10,20 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Table(name = "order_details")
-public class OrderDetails {
+public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_detail_id")
-    private Long orderDetailId;
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", nullable = false)
-    private Orders orderId;
+    private Order orderId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id", nullable = false)
-    private Products productId;
+    private Product productId;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;

@@ -6,19 +6,19 @@
 </head>
 <body>
 
-<p th:text="${customers.getCompanyName() + ' (' + customers.getAddress() + ')'}"/>
-<p th:text="${'Contact name: ' + customers.getContactName()}"/>
-<p th:text="${'Phone number: ' + customers.getPhoneNumber()}"/>
+<p th:text="${customer.getCompanyName() + ' (' + customer.getAddress() + ')'}"/>
+<p th:text="${'Contact name: ' + customer.getName()}"/>
+<p th:text="${'Phone number: ' + customer.getPhoneNumber()}"/>
 
 <!-- Visible for manager only -->
-<form th:method="DELETE" th:action="@{/panel/customers/{id} (id=${customers.getCustomerId()})}">
+<form th:method="DELETE" th:action="@{/panel/customers/{id} (id=${customer.getId()})}">
     <input type="submit" value="Delete"/>
 </form>
 
 <br/>
 <hr/>
 
-<a th:href="@{/panel/customers/{id}/edit (id=${customers.getCustomerId()})}">Edit</a>
+<a th:href="@{/panel/customers/{id}/edit (id=${customer.getId()})}">Edit</a>
 
 </body>
 </html>

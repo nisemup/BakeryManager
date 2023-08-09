@@ -6,23 +6,23 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum Role {
-    USER(Set.of(Permissions.READ)),
-    EMPLOYEE(Set.of(Permissions.READ, Permissions.WRITE)),
-    MANAGER(Set.of(Permissions.READ, Permissions.WRITE, Permissions.DELETE));
+    USER(Set.of(Permission.READ)),
+    EMPLOYEE(Set.of(Permission.READ, Permission.WRITE)),
+    MANAGER(Set.of(Permission.READ, Permission.WRITE, Permission.DELETE));
 
-    private final Set<Permissions> permissions;
+    private final Set<Permission> permissions;
 
-    Role(Set<Permissions> permissions) {
+    Role(Set<Permission> permissions) {
         this.permissions = permissions;
     }
 
-    public Set<Permissions> getPermissions() {
+    public Set<Permission> getPermissions() {
         return permissions;
     }
 
     public Set<SimpleGrantedAuthority> getAuthorities() {
         return getPermissions().stream()
-                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+                .map(permission -> new SimpleGrantedAuthority(permission.getPermissions()))
                 .collect(Collectors.toSet());
     }
 }

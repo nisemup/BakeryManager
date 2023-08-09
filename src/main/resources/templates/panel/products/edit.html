@@ -6,20 +6,20 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/panel/products/{id} (id=${products.getProductId()})}" th:object="${products}">
+<form th:method="PATCH" th:action="@{/panel/products/{id} (id=${product.getId()})}" th:object="${product}">
   <label for="category_id">Enter category: </label>
   <select th:field="*{categoryId}" class="form-control" id="category_id">
-    <option th:each="category: ${category}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+    <option th:each="category: ${category}" th:value="${category.getId}" th:text="${category.getName}"></option>
   </select>
-  <div style="color:red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">Category Error</div>
+  <div style="color:red" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Category Error</div>
   <br/>
   <label for="product_name">Enter product name: </label>
-  <input type="text" th:field="*{productName}" id="product_name"/>
-  <div style="color:red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">Name Error</div>
+  <input type="text" th:field="*{name}" id="product_name"/>
+  <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
   <br/>
   <label for="product_description">Enter description: </label>
-  <input type="text" th:field="*{productDescription}" id="product_description"/>
-  <div style="color:red" th:if="${#fields.hasErrors('productDescription')}" th:errors="*{productDescription}">Description error</div>
+  <input type="text" th:field="*{description}" id="product_description"/>
+  <div style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</div>
   <br/>
   <label for="price">Enter price: </label>
   <input type="text" th:field="*{price}" id="price"/>

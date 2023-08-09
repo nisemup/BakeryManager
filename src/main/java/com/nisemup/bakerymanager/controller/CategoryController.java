@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/panel/category")
+@RequestMapping("/panel/categories")
 public class CategoryController {
 
     @Autowired
@@ -17,32 +17,32 @@ public class CategoryController {
 
     @GetMapping()
     public String getCategory(Model model) {
-        model.addAttribute("category", categoryService.findAll());
+        model.addAttribute("categories", categoryService.findAll());
 
-        return "panel/category/category";
+        return "panel/categories/categories";
     }
 
     @GetMapping("/{category}")
     public String getCategoryInfo(Model model, @PathVariable Category category) {
         model.addAttribute("category", category);
 
-        return "panel/category/info";
+        return "panel/categories/info";
     }
 
     @GetMapping("/new")
     public String newCategory(@ModelAttribute("category") Category category) {
-        return "panel/category/new";
+        return "panel/categories/new";
     }
 
     @PostMapping()
     public String createCategory(@ModelAttribute("category") Category category,
                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors())
-            return "panel/category/new";
+            return "panel/categories/new";
 
         categoryService.create(category);
 
-        return "redirect:/panel/category";
+        return "redirect:/panel/categories";
     }
 
     @GetMapping("/{id}/edit")
@@ -51,7 +51,7 @@ public class CategoryController {
             // TODO: Make exception
             model.addAttribute("category", categoryService.findById(id).get());
 
-        return "/panel/category/edit";
+        return "/panel/categories/edit";
     }
 
     @PatchMapping("/{id}")
@@ -59,16 +59,16 @@ public class CategoryController {
                                  @PathVariable("id") Long id) {
 
         if (bindingResult.hasErrors())
-            return "panel/category/edit";
+            return "panel/categories/edit";
 
         categoryService.update(id, category);
-        return "redirect:/panel/category";
+        return "redirect:/panel/categories";
     }
 
     @DeleteMapping("/{id}")
     public String deleteCategory(@PathVariable("id") Long id) {
         categoryService.deleteById(id);
 
-        return "redirect:/panel/category";
+        return "redirect:/panel/categories";
     }
 }

@@ -10,22 +10,22 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Table(name = "products")
-public class Products {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
-    private Long productId;
+    @Column(name = "id")
+    private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", nullable = false)
     private Category categoryId;
 
-    @Column(name = "product_name", nullable = false, length = 50, unique = true)
-    private String productName;
+    @Column(name = "name", nullable = false, length = 50, unique = true)
+    private String name;
 
-    @Column(name = "product_description", nullable = false)
-    private String productDescription;
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @Column(name = "price", nullable = false)
     private BigDecimal price;

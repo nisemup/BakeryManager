@@ -5,10 +5,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Permissions {
+public enum Permission {
     READ("read"),
     WRITE("write"),
     DELETE("delete");
 
-    private final String permission;
+    private final String permissions;
 }

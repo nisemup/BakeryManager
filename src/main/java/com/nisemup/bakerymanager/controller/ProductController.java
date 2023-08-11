@@ -1,5 +1,6 @@
 package com.nisemup.bakerymanager.controller;
 
+import com.nisemup.bakerymanager.exception.NoEntityException;
 import com.nisemup.bakerymanager.model.Product;
 import com.nisemup.bakerymanager.service.CategoryService;
 import com.nisemup.bakerymanager.service.ProductService;
@@ -53,8 +54,8 @@ public class ProductController {
 
     @GetMapping("/{id}/edit")
     public String editProductDetails(Model model, @PathVariable("id") Long id) {
-        if (productService.findById(id).isPresent())
-            model.addAttribute("product", productService.findById(id).get());
+        model.addAttribute("product", productService.findById(id)
+                .orElseThrow(() -> new NoEntityException("Product not found!")));
 
         model.addAttribute("category", categoryService.findAll());
 

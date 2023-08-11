@@ -46,7 +46,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editCustomerDetails(Model model, @PathVariable("id") Long id) {
+    public String editCustomerInfo(Model model, @PathVariable("id") Long id) {
         model.addAttribute("customer", customerService.findById(id)
                 .orElseThrow(() -> new NoEntityException("Customer not found!")));
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New payment method</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/panel/payments}" th:object="${payment}">
+    <label for="type">Enter type: </label>
+    <input type="text" th:field="*{type}" id="type"/>
+    <div style="color:red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}">Name Error</div>
+    <br/>
+
+    <label for="allowed">Allowed: </label>
+    <input type="checkbox" th:field="*{allowed}" id="allowed"/>
+    <div style="color:red" th:if="${#fields.hasErrors('allowed')}" th:errors="*{allowed}">Allowed error</div>
+    <br/>
+
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment methods</title>
+</head>
+<body>
+
+<div th:each="payment : ${payments}">
+    <a th:href="@{/panel/payments/{id}(id=${payment.getId()})}"
+       th:text="${payment.getType()}"></a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/panel/payments/new">Create new payment method</a>
+
+</body>
+</html>

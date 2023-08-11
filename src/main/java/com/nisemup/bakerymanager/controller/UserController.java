@@ -1,6 +1,5 @@
 package com.nisemup.bakerymanager.controller;
 
-import com.nisemup.bakerymanager.exception.NoEntityException;
 import com.nisemup.bakerymanager.model.User;
 import com.nisemup.bakerymanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +47,9 @@ public class UserController {
 
     @GetMapping("/{id}/edit")
     public String editUserProfile(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.findById(id)
-                .orElseThrow(() -> new NoEntityException("User not found!")));
+        if (userService.findById(id).isPresent())
+            // TODO: Make exception
+            model.addAttribute("user", userService.findById(id).get());
 
         return "panel/users/edit";
     }

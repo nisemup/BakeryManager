@@ -1,6 +1,5 @@
 package com.nisemup.bakerymanager.service;
 
-import com.nisemup.bakerymanager.exception.NoEntityException;
 import com.nisemup.bakerymanager.model.Category;
 import com.nisemup.bakerymanager.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,7 @@ public class CategoryService {
     }
 
     public void create(Category category) {
+        // TODO: Make exception
         if (categoryRepository.findByName(category.getName()).isPresent())
             return;
 
@@ -34,8 +34,8 @@ public class CategoryService {
     }
 
     public void update(Long id, Category category) {
-        Category updatableCategory = categoryRepository.findById(id)
-                .orElseThrow(() -> new NoEntityException("Category not found!"));
+        // TODO: Make exception
+        Category updatableCategory = categoryRepository.findById(id).orElseThrow();
 
         updatableCategory.setName(category.getName());
         updatableCategory.setDescription(category.getDescription());

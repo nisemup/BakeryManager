@@ -1,6 +1,5 @@
 package com.nisemup.bakerymanager.controller;
 
-import com.nisemup.bakerymanager.exception.NoEntityException;
 import com.nisemup.bakerymanager.model.Category;
 import com.nisemup.bakerymanager.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +47,9 @@ public class CategoryController {
 
     @GetMapping("/{id}/edit")
     public String editCategoryInfo(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("category", categoryService.findById(id)
-                .orElseThrow(() -> new NoEntityException("Category not found!")));
+        if (categoryService.findById(id).isPresent())
+            // TODO: Make exception
+            model.addAttribute("category", categoryService.findById(id).get());
 
         return "/panel/categories/edit";
     }

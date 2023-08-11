@@ -20,14 +20,14 @@ public class ProductController {
     private CategoryService categoryService;
 
     @GetMapping()
-    private String getProducts(Model model) {
+    public String getProducts(Model model) {
         model.addAttribute("products", productService.findAll());
 
         return "panel/products/products";
     }
 
     @GetMapping("/{product}")
-    public String getProductDetails(Model model, @PathVariable Product product) {
+    public String getProductInfo(Model model, @PathVariable Product product) {
         model.addAttribute("product", product);
 
         return "panel/products/info";

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p th:text="${customer.getCompanyName() + ' (' + customer.getAddress() + ')'}"/>
+<p th:text="${'Contact name: ' + customer.getName()}"/>
+<p th:text="${'Phone number: ' + customer.getPhoneNumber()}"/>
+
+<!-- Visible for manager only -->
+<form th:method="DELETE" th:action="@{/panel/customers/{id} (id=${customer.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<br/>
+<hr/>
+
+<a th:href="@{/panel/customers/{id}/edit (id=${customer.getId()})}">Edit</a>
+
+</body>
+</html>

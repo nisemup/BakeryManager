@@ -12,12 +12,12 @@ public class PaymentMethod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "payment_id")
-    private Long paymentId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "payment_type", nullable = false, unique = true)
-    private String paymentType;
+    @Column(name = "type", nullable = false, unique = true)
+    private String type;
 
-    @Column(name = "payment_allowed", nullable = false, columnDefinition = "boolean default true")
-    private Boolean paymentAllowed;
+    @Column(name = "allowed", nullable = false, columnDefinition = "boolean default true")
+    private Boolean allowed;
 }

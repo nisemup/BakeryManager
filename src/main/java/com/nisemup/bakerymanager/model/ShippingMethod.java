@@ -12,9 +12,9 @@ public class ShippingMethod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "shipping_method_id")
+    @Column(name = "id")
     private Long shippingMethodId;
 
-    @Column(name = "shipping_method_name", nullable = false, length = 45, unique = true)
+    @Column(name = "name", nullable = false, length = 45, unique = true)
     private String shippingMethodName;
 }

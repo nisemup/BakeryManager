@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Category</title>
+</head>
+<body>
+
+<div th:each="category : ${categories}">
+    <a th:href="@{/panel/categories/{id}(id=${category.getId()})}"
+       th:text="${category.getName()}"></a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/panel/categories/new">Create new category</a>
+
+</body>
+</html>

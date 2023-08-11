@@ -1,5 +1,6 @@
 package com.nisemup.bakerymanager.service;
 
+import com.nisemup.bakerymanager.exception.NoEntityException;
 import com.nisemup.bakerymanager.model.User;
 import com.nisemup.bakerymanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,6 @@ public class UserService {
     }
 
     public void create(User user) {
-        // TODO: Make exception
         if (userRepository.findByEmail(user.getEmail()).isPresent())
             return;
 
@@ -40,8 +40,8 @@ public class UserService {
     }
 
     public void update(Long id, User user) {
-        // TODO: Make exception
-        User updatableUser = userRepository.findById(id).orElseThrow();
+        User updatableUser = userRepository.findById(id)
+                .orElseThrow(() -> new NoEntityException("Customer not found!"));
 
         updatableUser.setAvatar(user.getAvatar());
         updatableUser.setEmail(user.getEmail());

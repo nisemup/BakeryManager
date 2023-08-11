@@ -1,5 +1,6 @@
 package com.nisemup.bakerymanager.service;
 
+import com.nisemup.bakerymanager.exception.NoEntityException;
 import com.nisemup.bakerymanager.model.Customer;
 import com.nisemup.bakerymanager.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class CustomerService {
     }
 
     public void create(Customer customer) {
-        // TODO: Make exception
         if (customerRepository.findByAddress(customer.getAddress()).isPresent())
             return;
 
@@ -31,8 +31,8 @@ public class CustomerService {
     }
 
     public void update(Long id, Customer customer) {
-        // TODO: Make exception
-        Customer updatableCustomer = customerRepository.findById(id).orElseThrow();
+        Customer updatableCustomer = customerRepository.findById(id)
+                .orElseThrow(() -> new NoEntityException("Customer not found!"));
 
         updatableCustomer.setCompanyName(customer.getCompanyName());
         updatableCustomer.setAddress(customer.getAddress());

@@ -1,5 +1,6 @@
 package com.nisemup.bakerymanager.controller;
 
+import com.nisemup.bakerymanager.exception.NoEntityException;
 import com.nisemup.bakerymanager.model.Customer;
 import com.nisemup.bakerymanager.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +47,8 @@ public class CustomerController {
 
     @GetMapping("/{id}/edit")
     public String editCustomerDetails(Model model, @PathVariable("id") Long id) {
-        // TODO: Make exception
-        if (customerService.findById(id).isPresent()) {
-            model.addAttribute("customer", customerService.findById(id).get());
-        }
+        model.addAttribute("customer", customerService.findById(id)
+                .orElseThrow(() -> new NoEntityException("Customer not found!")));
 
         return "panel/customers/edit";
     }

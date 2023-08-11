@@ -23,10 +23,10 @@ public class CustomerController {
     }
 
     @GetMapping("/{customer}")
-    public String getCustomerDetails(Model model, @PathVariable Customer customer) {
+    public String getCustomerInfo(Model model, @PathVariable Customer customer) {
         model.addAttribute("customer", customer);
 
-        return "panel/customers/customerDetails";
+        return "panel/customers/info";
     }
 
     @GetMapping("/new")

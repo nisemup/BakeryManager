@@ -53,7 +53,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editProductDetails(Model model, @PathVariable("id") Long id) {
+    public String editProductInfo(Model model, @PathVariable("id") Long id) {
         model.addAttribute("product", productService.findById(id)
                 .orElseThrow(() -> new NoEntityException("Product not found!")));
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trucks</title>
+</head>
+<body>
+
+<div th:each="truck : ${trucks}">
+    <a th:href="@{/panel/trucks/{id}(id=${truck.getId()})}"
+       th:text="${truck.getBrand() + ' ' + truck.getModel() + ' (' + truck.getNumberPlate() + ')'}"></a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/panel/trucks/new">Create new truck</a>
+
+</body>
+</html>

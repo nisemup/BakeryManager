@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Truck edit</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/panel/trucks/{id} (id=${truck.getId()})}" th:object="${truck}">
+    <label for="brand">Enter brand name: </label>
+    <input type="text" th:field="*{brand}" id="brand"/>
+    <div style="color:red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand error</div>
+    <br/>
+    <label for="model">Enter model: </label>
+    <input type="text" th:field="*{model}" id="model"/>
+    <div style="color:red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model error</div>
+    <br/>
+    <label for="color">Enter color: </label>
+    <input type="text" th:field="*{color}" id="color"/>
+    <div style="color:red" th:if="${#fields.hasErrors('color')}" th:errors="*{color}">Color error</div>
+    <br/>
+    <label for="number_plate">Enter number plate: </label>
+    <input type="text" th:field="*{numberPlate}" id="number_plate"/>
+    <div style="color:red" th:if="${#fields.hasErrors('numberPlate')}" th:errors="*{numberPlate}">Number plate error</div>
+    <br/>
+    <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Truck</title>
+</head>
+<body>
+
+<p th:text="${truck.getBrand()}"/>
+<p th:text="${truck.getModel()}"/>
+<p th:text="${truck.getColor()}"/>
+<p th:text="${truck.getNumberPlate()}"/>
+
+
+<!-- Visible for manager only -->
+<form th:method="DELETE" th:action="@{/panel/trucks/{id} (id=${truck.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<br/>
+<hr/>
+
+<a th:href="@{/panel/trucks/{id}/edit (id=${truck.getId()})}">Edit</a>
+
+</body>
+</html>

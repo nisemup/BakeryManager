@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
@@ -30,10 +30,6 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "payment_id", nullable = false)
     private PaymentMethod paymentId;
-
-    @ManyToOne
-    @JoinColumn(name = "shipping_method_id", nullable = false)
-    private ShippingMethod shippingMethodId;
 
     @Column(name = "order_date", nullable = false)
     @CreatedDate

@@ -11,7 +11,7 @@ import lombok.Setter;
 public class PaymentMethod {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private Long id;
 
@@ -20,4 +20,5 @@ public class PaymentMethod {
 
     @Column(name = "allowed", nullable = false, columnDefinition = "boolean default true")
     private Boolean allowed;
+
 }

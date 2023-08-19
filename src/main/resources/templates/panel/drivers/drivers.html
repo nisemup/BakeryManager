@@ -8,7 +8,7 @@
 
 <div th:each="driver : ${drivers}">
     <a th:href="@{/panel/drivers/{id}(id=${driver.getId()})}"
-       th:text="${driver.getUser().getFirstName() + ' ' + driver.getUser().getFirstName() +
+       th:text="${driver.getUser().getFirstName() + ' ' + driver.getUser().getLastName() +
        ' (' + driver.getTruck().getNumberPlate() + ')'}"></a>
 </div>
 

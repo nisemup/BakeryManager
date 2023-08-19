@@ -1,0 +1,3 @@
+DELETE FROM drivers;
+DELETE FROM users;
+DELETE FROM trucks;

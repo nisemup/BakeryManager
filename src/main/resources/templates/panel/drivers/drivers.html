@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Drivers</title>
+</head>
+<body>
+
+<div th:each="driver : ${drivers}">
+    <a th:href="@{/panel/drivers/{id}(id=${driver.getId()})}"
+       th:text="${driver.getUser().getFirstName() + ' ' + driver.getUser().getFirstName() +
+       ' (' + driver.getTruck().getNumberPlate() + ')'}"></a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/panel/drivers/new">Create new driver</a>
+
+</body>
+</html>

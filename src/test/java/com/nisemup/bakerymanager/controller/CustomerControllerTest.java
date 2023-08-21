@@ -2,32 +2,16 @@ package com.nisemup.bakerymanager.controller;
 
 import com.nisemup.bakerymanager.model.Customer;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
-@WithMockUser
-@AutoConfigureMockMvc
-@SpringBootTest
-@TestPropertySource("/application-test.properties")
 @Sql(value = "/sql/create-customers-before.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/sql/create-customers-after.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-class CustomerControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    private static final Long id = 1L;
+class CustomerControllerTest extends AbstractControllerTest {
 
     @Test
     void getCustomer_ShouldReturnCustomersPage() throws Exception {

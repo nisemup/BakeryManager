@@ -7,6 +7,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
+
 @WithMockUser
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -17,4 +19,6 @@ public abstract class AbstractControllerTest {
     protected MockMvc mockMvc;
 
     protected static final Long id = 1L;
+
+    LocalDate testDate = LocalDate.of(2021, 1, 1);
 }

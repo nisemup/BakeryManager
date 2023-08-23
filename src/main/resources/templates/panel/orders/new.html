@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New order</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/panel/orders}" th:object="${order}">
+    <label for="user_id">Select a user: </label>
+    <select th:field="*{userId}" class="form-control" id="user_id">
+        <option th:each="user: ${users}" th:value="${user.getId}"
+                th:text="${user.getFirstName() + ' ' + user.getLastName()}"/>
+    </select>
+    <div style="color:red" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}">User Error</div>
+    <br/>
+
+    <label for="customer_id">Select a customer: </label>
+    <select th:field="*{customerId}" class="form-control" id="customer_id">
+        <option th:each="customer: ${customers}" th:value="${customer.getId()}"
+                th:text="${customer.getCompanyName() + ' (' + customer.getAddress() + ')'}"/>
+    </select>
+    <div style="color:red" th:if="${#fields.hasErrors('customerId')}" th:errors="*{customerId}">Customer Error</div>
+    <br/>
+
+    <label for="payment_id">Select a payment method: </label>
+    <select th:field="*{paymentId}" class="form-control" id="payment_id">
+        <option th:each="paymentMethod: ${paymentMethods}" th:value="${paymentMethod.getId()}"
+                th:text="${paymentMethod.getType()}"/>
+    </select>
+    <div style="color:red" th:if="${#fields.hasErrors('paymentId')}" th:errors="*{paymentId}">Payment method Error</div>
+    <br/>
+
+    <label for="required_date">Enter required date: </label>
+    <input type="date" th:field="*{requiredDate}" id="required_date"/>
+    <div style="color:red" th:if="${#fields.hasErrors('requiredDate')}" th:errors="*{requiredDate}">Required date Error</div>
+    <br/>
+
+    <label for="delivered_date">Enter delivered date: </label>
+    <input type="datetime-local" th:field="*{deliveredDate}" id="delivered_date"/>
+    <div style="color:red" th:if="${#fields.hasErrors('deliveredDate')}" th:errors="*{deliveredDate}">Delivered date Error</div>
+    <br/>
+
+    <label for="transaction_status">Enter transaction status: </label>
+    <input type="text" th:field="*{transactionStatus}" id="transaction_status"/>
+    <div style="color:red" th:if="${#fields.hasErrors('transactionStatus')}" th:errors="*{transactionStatus}">Transaction status Error</div>
+    <br/>
+
+    <label for="delivered">Delivered: </label>
+    <input type="checkbox" th:field="*{delivered}" id="delivered"/>
+    <div style="color:red" th:if="${#fields.hasErrors('delivered')}" th:errors="*{delivered}">Delivered error</div>
+    <br/>
+
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>

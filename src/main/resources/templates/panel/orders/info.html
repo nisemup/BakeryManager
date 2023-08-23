@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+
+<p th:text="${order.getUserId().getFirstName() + ' ' + order.getUserId().getLastName()}"/>
+<p th:text="${order.getCustomerId().getAddress()}"/>
+<p th:text="${order.getPaymentId().getType()}"/>
+<p th:text="${order.getOrderDate()}"/>
+<p th:text="${order.getRequiredDate()}"/>
+<p th:text="${order.getDeliveredDate()}"/>
+<p th:text="${order.getTransactionStatus()}"/>
+<p th:text="${order.getDelivered()}"/>
+
+<!-- Visible for manager only -->
+<form th:method="DELETE" th:action="@{/panel/orders/{id} (id=${order.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+<br/>
+<hr/>
+
+<a th:href="@{/panel/orders/{id}/edit (id=${order.getId()})}">Edit</a>
+
+</body>
+</html>

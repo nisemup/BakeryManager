@@ -1,9 +1,11 @@
 package com.nisemup.bakerymanager.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,18 +35,21 @@ public class Order {
 
     @Column(name = "order_date", nullable = false)
     @CreatedDate
-    private LocalDateTime orderDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime orderDate = LocalDateTime.now();
 
     @Column(name = "required_date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate requiredDate;
 
     @Column(name = "delivered_date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime deliveredDate;
 
     @Column(name = "transaction_status", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private TransactionStatus transactionStatus;
+    private TransactionStatus transactionStatus = TransactionStatus.INPROGRESS;
 
     @Column(name = "delivered", nullable = false, columnDefinition = "boolean default false")
-    private Boolean delivered;
+    private Boolean delivered = false;
 }

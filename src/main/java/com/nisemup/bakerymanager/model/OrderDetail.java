@@ -8,27 +8,14 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "order_details")
+@Embeddable
 public class OrderDetail {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Long id;
-
     @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order orderId;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
     private Product productId;
 
-    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "total", nullable = false)
     private BigDecimal total;
 
 }

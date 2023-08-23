@@ -10,6 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -32,6 +35,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "payment_id", nullable = false)
     private PaymentMethod paymentId;
+
+    @ElementCollection
+    @OrderColumn
+    private List<OrderDetail> orderItems = new ArrayList<>();
 
     @Column(name = "order_date", nullable = false)
     @CreatedDate

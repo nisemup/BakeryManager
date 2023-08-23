@@ -36,6 +36,10 @@ public class Order {
     @JoinColumn(name = "payment_id", nullable = false)
     private PaymentMethod paymentId;
 
+    @ManyToOne
+    @JoinColumn(name = "driver_id", nullable = false)
+    private Driver driverId;
+
     @ElementCollection
     @OrderColumn
     private List<OrderDetail> orderItems = new ArrayList<>();

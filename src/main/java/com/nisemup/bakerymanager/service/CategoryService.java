@@ -44,4 +44,12 @@ public class CategoryService {
 
         categoryRepository.save(updatableCategory);
     }
+
+    public List<Category> findByNameContainingIgnoreCase(String keyword) {
+        return categoryRepository.findByNameContainingIgnoreCase(keyword);
+    }
+
+    public void updateActiveStatus(Long id, boolean active) {
+        categoryRepository.updateActiveStatus(id, active);
+    }
 }

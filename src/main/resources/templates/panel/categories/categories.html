@@ -75,7 +75,7 @@
                            th:data-category-id="${category.id}" th:data-active="true"></a>
                     </td>
                     <td>
-                        <a th:href="@{'/panel/categories/' + ${category.id} + '/edit'}" title="Edit this category"
+                        <a th:href="@{'/panel/categories/' + ${category.id}}" title="Edit this category"
                            class="fa-regular fa-pen-to-square icon-dark"></a>
                         &nbsp;
                         <a th:action="@{'/panel/categories/' + ${category.id}}"

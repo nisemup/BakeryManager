@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +43,6 @@ public class CategoryController {
         return "panel/categories/categories";
     }
 
-    @GetMapping("/{category}")
-    public String getCategoryInfo(Model model, @PathVariable Category category) {
-        model.addAttribute("category", category);
-
-        return "panel/categories/info";
-    }
-
     @GetMapping("/new")
     public String newCategory(@ModelAttribute("category") Category category) {
         return "panel/categories/new";
@@ -65,22 +59,32 @@ public class CategoryController {
         return "redirect:/panel/categories";
     }
 
-    @GetMapping("/{id}/edit")
-    public String editCategoryInfo(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("category", categoryService.findById(id)
-                .orElseThrow(() -> new NoEntityException("Category not found!")));
+    @GetMapping("/{id}")
+    public String editCategoryInfo(Model model, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        try {
+            model.addAttribute("category", categoryService.findById(id)
+                    .orElseThrow(() -> new NoEntityException("Category with id " + id + " not found!")));
+        } catch (NoEntityException e) {
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
 
-        return "/panel/categories/edit";
+            return "redirect:/panel/categories";
+        }
+
+        model.addAttribute("pageTitle", "Edit category (ID: " + id + ")");
+        return "panel/categories/form";
     }
 
     @PatchMapping("/{id}")
-    public String updateCategory(@ModelAttribute("category") Category category, BindingResult bindingResult,
-                                 @PathVariable("id") Long id) {
+    public String updateCategory(@ModelAttribute("category") Category category,
+                                 @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        try {
+            categoryService.update(id, category);
 
-        if (bindingResult.hasErrors())
-            return "panel/categories/edit";
+            redirectAttributes.addFlashAttribute("message", "The category has been saved successfully!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
+        }
 
-        categoryService.update(id, category);
         return "redirect:/panel/categories";
     }
 

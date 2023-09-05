@@ -45,4 +45,8 @@ public class CustomerService {
     public void deleteById(Long id) {
         customerRepository.deleteById(id);
     }
+
+    public List<Customer> findByAddressContainingIgnoreCase(String keyword) {
+        return customerRepository.findByAddressContainingIgnoreCase(keyword);
+    }
 }

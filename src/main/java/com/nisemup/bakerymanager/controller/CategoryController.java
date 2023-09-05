@@ -44,15 +44,18 @@ public class CategoryController {
     }
 
     @GetMapping("/new")
-    public String newCategory(@ModelAttribute("category") Category category) {
-        return "panel/categories/new";
+    public String newCategory(@ModelAttribute("category") Category category, Model model) {
+        model.addAttribute("method", "POST");
+        model.addAttribute("pageTitle", "Create new category");
+
+        return "panel/categories/form";
     }
 
     @PostMapping()
     public String createCategory(@ModelAttribute("category") Category category,
                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors())
-            return "panel/categories/new";
+            return "panel/categories/form";
 
         categoryService.create(category);
 

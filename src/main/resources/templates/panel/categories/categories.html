@@ -44,6 +44,7 @@
                     </div>
                     <div class="col-md-6 mt-2">
                         <button id="btnClear" class="btn btn-info">Clear</button>
+                        <button id="btnNew" class="btn btn-info">New</button>
                     </div>
                 </div>
             </form>
@@ -114,8 +115,6 @@
         </div>
     </div>
 
-    <a href="/panel/categories/new">Create new category</a>
-
     <script type="text/javascript">
         $(document).ready(function () {
             $(".btn-delete").on("click", function (event) {
@@ -150,6 +149,11 @@
                 e.preventDefault();
                 $("#keyword").text("");
                 window.location = "[[@{/panel/categories}]]";
+            });
+
+            $("#btnNew").on("click", function (e) {
+                e.preventDefault();
+                window.location = "[[@{/panel/customers/new}]]";
             });
 
             $("a.active-link, a.inactive-link").click(function (event) {

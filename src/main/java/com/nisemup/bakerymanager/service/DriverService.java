@@ -41,4 +41,8 @@ public class DriverService {
     public void deleteById(Long id) {
         driverRepository.deleteById(id);
     }
+
+    public List<Driver> findByLicenseContainingIgnoreCase(String licence) {
+        return driverRepository.findByLicenseContainingIgnoreCase(licence);
+    }
 }
